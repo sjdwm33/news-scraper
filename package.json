@@ -21,7 +21,7 @@
     "express": "^4.15.3",
     "express-handlebars": "^3.0.0",
     "mongoose": "^4.10.5",
-    "cheerio": "^1.0.0",
+    "cheerio": "^0.20.0",
     "request": "^2.81.0"
   }
 }

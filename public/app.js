@@ -37,7 +37,7 @@ $(document).on("click", "#saveArticle", function() {
 });
 
 //Click to add new note
-$(document).on("click", "#newNote", function() {
+$(document).on("click", "#new", function() {
 
   // Save the id from the p tag
   var thisId = $(this).attr("data-id");
