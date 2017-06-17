@@ -4,7 +4,9 @@ $(document).on("click", "#scraper", function(){
     // For each one
     for (var i = 0; i < data.length; i++) {
       // Display the apropos information on the page
-      $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
+      $("#articles").append(
+        "<div data-id='" + data[i]._id + "' class='panel panel-default'> <div class='panel-heading'>" + data[i].title + "    " + "<button class='btn btn-success' id='saveArticle'>Save Article</button> </div><div class='panel-body'>" + data[i].link + "</div>"
+        );
     }
   });
 });
