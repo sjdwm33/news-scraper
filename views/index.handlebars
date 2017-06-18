@@ -1,36 +1,66 @@
-<div class="container">
-
-  <div class="row">
-    <div class="col-md-3">
-      <h3>News-Scraper</h3>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+    <!-- May need to remove this section-->
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    <!-- Down to here............................. -->
+      <a class="navbar-brand" href="#">News-Scraper</a>
     </div>
-    <div class="col-md-3">
-      <button class="btn btn-primary btn-lg">Home</button>
-      <button class="btn btn-primary btn-lg">Saved Articles</button>
-      <button class="btn btn-danger btn-lg scraper">Scrape New Articles</button>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Home<span class="sr-only">(current)</span></a></li>
+        <li><a href="/saved">Saved Articles</a></li>
+      </ul>
+      <form action="/scrape" method="GET">
+        <button type="submit" onclick="myFunction()" class="btn btn-danger navbar-btn">Scrape New Articles!</button>
+      </form>
     </div>
   </div>
-
- 
-
-
-
-
-  <form class="create-update-form" action="/" method="POST">
-
-    <div class="form-group">
-      <label for="ca">Cat Name:</label>
-      <input type="text" id="ca" name="name">
+</nav>
+<div class="container">
+  <div class="row">
+    <div class="jumbotron main-banner">
+      <h1 class="text-center">NEWS-SCRAPER</h1>
+       <p class="text-center">New York Times Edition</p>
+      {{!-- <img src="/assets/img/burger_choice.jpg" class="center-block" alt="burger" height="120"> --}}
     </div>
-
-    <div class="form-group">
-      <label for="slee">Sleepy?</label><br>
-      <input type="radio" name="sleepy" value="1" checked> Sleepy!<br>
-      <input type="radio" name="sleepy" value="0"> Awake
+  </div>
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">ARTICLES SCRAPED</div>
+        <div class="panel-body">
+          {{#each articles}}
+          <div class="panel panel-default">
+            <div class="panel panel-heading">
+              <p>{{title}}</p>
+            </div>
+            <div class="panel-body">
+              <a target="_blank" href={{link}}>{{link}}</a>
+              <form class=pull-right action="/{{this.id}}?_method=PUT" method="POST">
+                <input type="hidden" name="id" value="{{this.id}}">
+                <button type="submit" id="save" margin="20px" class="btn btn-success">SAVE</button>
+              </form>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+<!--       <div class="row">
+          <div id="articles"></div>
+      </div> -->
     </div>
-
-    <button type="submit">Add Cat</button>
-  </form>
-
-
+  </div>
 </div>
+<script>
+function myFunction(data) {
+    location.reload();
+}
+</script>
+
+

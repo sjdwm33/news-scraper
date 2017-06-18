@@ -1,0 +1,90 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+    <!-- May need to remove this section-->
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    <!-- Down to here............................. -->
+      <a class="navbar-brand" href="#">Mongo Scraper</a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Home<span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Saved Articles</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <div class="row">
+    <div class="jumbotron main-banner">
+      <h1 class="text-center">MONGO SCRAPER</h1>
+       <p class="text-center">Washington Post Edition</p>
+      {{!-- <img src="/assets/img/burger_choice.jpg" class="center-block" alt="burger" height="120"> --}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">ARTICLES SAVED</div>
+
+        <div class="panel-body">
+          {{#each articlesSaved}}
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <a target="_blank" href={{link}}>{{title}}</a>
+              <form id="delete-form" class=pull-right action="/saved/delete/{{this.id}}?_method=PUT" method="POST">
+                <input type="hidden" name="id" value="{{this.id}}">
+                <button type="submit" id="delete" class="btn btn-danger">DELETE</button>
+              </form>
+              <form id="note-form" class=pull-right action="/note/{{this.id}}?_method=PUT" method="POST">
+              <button type="button" class="btn btn-primary btn-large" data-toggle="modal" data-target="#myModal{{this.id}}">Add Note</button>
+              </form>
+              <div class="modal fade" id="myModal{{this.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">{{this.title}}</h5>
+                      <hr>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                      {{#each this.notes}}
+                      <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-sm-9">
+                                        <p class="list-group-item-text">{{ this.body }}</p>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <button type="submit" form="hidden-form-{{ this.id }}" class="btn btn-secondary btn-sm pull-right">Delete</button>
+                                        <form method="POST" action="/saved/notes/{{ this.id }}?_method=DELETE" id="hidden-form-{{ this.id }}" class="hidden-xs-up"></form>
+                                    </div>
+                                </div>
+                            </li>
+                         {{/each}}
+                    </div>
+                    <div class="modal-body">
+                      <form class="form-group" method="POST" action="saved/notes/{{this.id}}">
+                        <label for="exampleTextarea">Write your note here!</label>
+                        <textarea class="form-control" name="body" id="body" rows="3"></textarea>
+                      <hr>
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">Save changes</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+
+
+

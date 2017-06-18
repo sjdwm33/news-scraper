@@ -1,8 +1,8 @@
-// Require mongoose
-var mongoose = require("mongoose");
-var Schema = mongoose.Schema;
+var mongoose = require('mongoose');
+mongoose.Types.ObjectId.isValid('your id here');
 
-var ArticleSchema = new Schema({
+var Schema = mongoose.Schema;
+var articlesSchema = new Schema({
     title: {
         type: String,
         required: true
@@ -10,9 +10,10 @@ var ArticleSchema = new Schema({
     link: {
         type: String,
         required: true,
+        // unique: true, // this would work
         validate: {
             validator: function (linkOfArticle, cb) {
-                Article.find({
+                Business.find({
                     link: linkOfArticle
                 }, function (err, docs) {
                     cb(docs.length === 0);
@@ -30,9 +31,5 @@ var ArticleSchema = new Schema({
         ref: 'Note'
     }]
 });
-
-// Create the Article model with the ArticleSchema
-var Article = mongoose.model("Article", ArticleSchema);
-
-// Export the model
-module.exports = Article;
+var Business = mongoose.model('Business', articlesSchema);
+module.exports = Business;

@@ -1,22 +1,21 @@
 // Grab the articles as a json
 $(document).on("click", "#scraper", function(){
-  $.getJSON("/articles", function(data) {
+  $.getJSON("/scrape", function(data) {
     // For each one
     for (var i = 0; i < data.length; i++) {
       // Display the apropos information on the page
       $("#articles").append(
-        "<div data-id='" + data[i]._id + "' class='panel panel-default'> <div class='panel-heading'>" + data[i].title + "    " + "<button class='btn btn-success' id='saveArticle'>Save Article</button> </div><div class='panel-body'>" + data[i].link + "</div>"
+        "<div  class='panel panel-default'> <div class='panel-heading'>" + data[i].title + "" + "<button data-id='" + data[i]._id + "'class='btn btn-success' id='save'>Save Article</button> </div><div class='panel-body'>" + data[i].link + "</div> </div"
         );
     }
   });
 });
 
-// //Save an article
+//Save an article
 // $(document).on("click", "#saveArticle", function() {
 //   // Grab the id associated with the article from the submit button
 //   var thisId = $(this).attr("data-id");
 
-//   // Run a POST request to change the note, using what's entered in the inputs
 //   $.ajax({
 //     method: "POST",
 //     url: "/articles/" + thisId,
@@ -31,13 +30,8 @@ $(document).on("click", "#scraper", function(){
 //     .done(function(data) {
 //       // Log the response
 //       console.log(data);
-//       $("#savedArticles").append("<h2>" + data.title + "</h2>");
-//       $("#savedArticles").append("<p>" + data.link + <"</p>");
+//       $("#savedArticles").append("<div class='panel panel-default'> <div class='panel-heading'>" + data.title + " " + " " + "<button class='btn btn-primary' id='articleNotes'>Article Notes</button>" + "" + "<button class='btn btn-danger' id='deleteArticle'>Delete From Saved</button> </div> <div class='panel-body'>" + data.link + "</div> </div>");
 //     });
-
-//   // Also, remove the values entered in the input and textarea for note entry
-//   $("#titleinput").val("");
-//   $("#bodyinput").val("");
 // });
 
 // //Click to add new note
